@@ -200,6 +200,7 @@ def page() -> str:
 <link rel="canonical" href="{SITE}/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="google-site-verification" content="{GSC_META}">
+<meta name="msvalidate.01" content="20FD7ED94DCC9D4C4ED1856029EB2777">
 <meta name="theme-color" content="#fbfaf7">
 <meta name="color-scheme" content="light">
 <meta property="og:type" content="profile">
