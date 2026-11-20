@@ -290,6 +290,27 @@ def llms() -> str:
     return "\n".join(out)
 
 
+def profile_readme() -> str:
+    """The github.com/behoss profile README (repo behoss/behoss), from the same data."""
+    out = [f"# {NAME}", "",
+           f"**{JOB}.** I build and run {COUNT} UK online businesses that rank on Google and get recommended by ChatGPT, Gemini and Perplexity, and I turn LLMs and AI agents into products that do the same.",
+           "", f"👉 **Everything I run, in one place: [behoss.github.io]({SITE}/)**", ""]
+    for _, heading, _, items in SECTIONS:
+        out += [f"### {heading}", "", "| | Business | What you get |", "|---|---|---|"]
+        out += [f'| <img src="{SITE}/img/{i}" width="28" height="28" alt=""> | [**{n}**]({u}) | {d} |'
+                for n, u, _, i, d, _ in items]
+        out.append("")
+    out += ["### Open source", ""]
+    out += [f"- [**{r}**](https://github.com/behoss/{r}): {d} Powers [{b}]({bu})." for r, _, d, b, bu in OPEN_SOURCE]
+    out += ["", "### How I build", "",
+            "Python · TypeScript · Swift · Next.js · FastAPI · PostgreSQL · Neo4j · Cloudflare · AWS · "
+            "Claude, GPT and Gemini · RAG, agents and tool calling · voice AI · SEO and GEO.", "",
+            "**Want an AI product built?** [Softgen, the AI app development agency in London](https://softgen.co.uk) "
+            "ships AI apps, SaaS platforms, MVPs and mobile apps, fixed price and live in weeks. "
+            "[Get a quote →](https://softgen.co.uk/contact)", ""]
+    return "\n".join(out)
+
+
 def sitemap() -> str:
     urls = [f"{SITE}/"] + [f"{SITE}/{r}/" for r in sorted(PAGES_REPOS)]
     body = "".join(f"<url><loc>{u}</loc><lastmod>{UPDATED}</lastmod></url>" for u in urls)
@@ -300,4 +321,5 @@ if __name__ == "__main__":
     (ROOT / "index.html").write_text(page())
     (ROOT / "llms.txt").write_text(llms())
     (ROOT / "sitemap.xml").write_text(sitemap())
+    (ROOT / "profile-README.md").write_text(profile_readme())
     print(f"built: {COUNT} businesses, {len(OPEN_SOURCE)} repos, {len(page())//1024} KB index.html")
